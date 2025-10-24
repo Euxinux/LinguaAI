@@ -1,34 +1,37 @@
 package com.linguaai.common.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
+import java.util.List;
+
 @Converter
-public class JsonConverter implements AttributeConverter<Object, String> {
+public class JsonConverter implements AttributeConverter<List<String>, String> {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public String convertToDatabaseColumn(Object attribute) {
-        if (attribute == null)
-            return null;
+    public String convertToDatabaseColumn(List<String> attribute) {
+        if (attribute == null || attribute.isEmpty())
+            return "[]";
         try {
             return objectMapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Error converting to JSON", e);
+            throw new IllegalArgumentException("Error converting list to JSON string", e);
         }
     }
 
     @Override
-    public Object convertToEntityAttribute(String dbData) {
-        if (dbData == null)
+    public List<String> convertToEntityAttribute(String dbData) {
+        if (dbData == null || dbData.isBlank())
             return null;
         try {
-            return objectMapper.readValue(dbData, Object.class);
+            return objectMapper.readValue(dbData, new TypeReference<List<String>>() {});
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Error converting to JSON", e);
+            throw new IllegalArgumentException("Error converting JSON string to list", e);
         }
     }
 }
