@@ -1,0 +1,449 @@
+databaseChangeLog:
+- changeSet:
+    id: 1761331095265-1
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: users_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: username
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(100)
+        - column:
+            constraints:
+              nullable: false
+            name: password_hash
+            type: VARCHAR(255)
+        - column:
+            defaultValue: EN
+            name: preferred_language
+            type: VARCHAR(5)
+        - column:
+            defaultValueComputed: now()
+            name: created_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: updated_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        tableName: users
+- changeSet:
+    id: 1761331095265-2
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: roles_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(50)
+        tableName: roles
+- changeSet:
+    id: 1761331095265-3
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: categories_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(100)
+        - column:
+            name: language_code
+            type: VARCHAR(5)
+        tableName: categories
+- changeSet:
+    id: 1761331095265-4
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: quizzes_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: user_id
+            type: BIGINT
+        - column:
+            name: language_code
+            type: VARCHAR(5)
+        - column:
+            name: category_id
+            type: BIGINT
+        - column:
+            name: difficulty
+            type: VARCHAR(10)
+        - column:
+            defaultValueComputed: now()
+            name: created_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            defaultValueBoolean: true
+            name: ai_generated
+            type: BOOLEAN
+        tableName: quizzes
+- changeSet:
+    id: 1761331095265-5
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: questions_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: quiz_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: question_text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: options
+            type: JSONB
+        - column:
+            constraints:
+              nullable: false
+            name: correct_option
+            type: VARCHAR(5)
+        - column:
+            defaultValueComputed: now()
+            name: created_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        tableName: questions
+- changeSet:
+    id: 1761331095265-6
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: user_quiz_history_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: user_id
+            type: BIGINT
+        - column:
+            name: quiz_id
+            type: BIGINT
+        - column:
+            name: score
+            type: INTEGER
+        - column:
+            name: completed_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        tableName: user_quiz_history
+- changeSet:
+    id: 1761331095265-7
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tasks_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: quiz_id
+            type: BIGINT
+        - column:
+            name: type
+            type: VARCHAR(50)
+        - column:
+            name: content
+            type: JSONB
+        - column:
+            defaultValueComputed: now()
+            name: created_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        tableName: tasks
+- changeSet:
+    id: 1761331095265-8
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: languages_pkey
+            name: code
+            type: VARCHAR(5)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(50)
+        tableName: languages
+- changeSet:
+    id: 1761331095265-9
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: user_roles_pkey
+            name: user_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: user_roles_pkey
+            name: role_id
+            type: BIGINT
+        tableName: user_roles
+- changeSet:
+    id: 1761331095265-10
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: users_email_key
+        tableName: users
+- changeSet:
+    id: 1761331095265-11
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addUniqueConstraint:
+        columnNames: username
+        constraintName: users_username_key
+        tableName: users
+- changeSet:
+    id: 1761331095265-12
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: roles_name_key
+        tableName: roles
+- changeSet:
+    id: 1761331095265-13
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: language_code
+        baseTableName: categories
+        constraintName: fk_categories_language_code
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: code
+        referencedTableName: languages
+        validate: true
+- changeSet:
+    id: 1761331095265-14
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: quiz_id
+        baseTableName: questions
+        constraintName: fk_questions_quiz_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: CASCADE
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: quizzes
+        validate: true
+- changeSet:
+    id: 1761331095265-15
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: category_id
+        baseTableName: quizzes
+        constraintName: fk_quizzes_category_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: categories
+        validate: true
+- changeSet:
+    id: 1761331095265-16
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: language_code
+        baseTableName: quizzes
+        constraintName: fk_quizzes_language_code
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: code
+        referencedTableName: languages
+        validate: true
+- changeSet:
+    id: 1761331095265-17
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: quizzes
+        constraintName: fk_quizzes_user_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: users
+        validate: true
+- changeSet:
+    id: 1761331095265-18
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: quiz_id
+        baseTableName: tasks
+        constraintName: fk_tasks_quiz_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: quizzes
+        validate: true
+- changeSet:
+    id: 1761331095265-19
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: quiz_id
+        baseTableName: user_quiz_history
+        constraintName: fk_user_quiz_history_quizzes_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: quizzes
+        validate: true
+- changeSet:
+    id: 1761331095265-20
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: user_quiz_history
+        constraintName: fk_user_quiz_history_users_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: users
+        validate: true
+- changeSet:
+    id: 1761331095265-21
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: role_id
+        baseTableName: user_roles
+        constraintName: fk_user_roles_role_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: roles
+        validate: true
+- changeSet:
+    id: 1761331095265-22
+    author: Daniel (generated)
+    contextFilter: PROD
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: user_roles
+        constraintName: fk_user_roles_user_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: users
+        validate: true
+
