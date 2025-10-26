@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: linguaai
+      POSTGRES_USER: lingua_user
+      POSTGRES_PASSWORD: lingua_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./linguaai-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/linguaai
+      SPRING_DATASOURCE_USERNAME: lingua_user
+      SPRING_DATASOURCE_PASSWORD: lingua_pass
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+volumes:
+  pgdata:
