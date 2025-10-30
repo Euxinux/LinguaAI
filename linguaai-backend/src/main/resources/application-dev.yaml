@@ -1,12 +1,10 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/linguaai
-    username: linguaai
-    password: password
+    url: jdbc:postgresql://localhost:5432/linguaai
+    username: lingua_user
+    password: lingua_pass
     driver-class-name: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
