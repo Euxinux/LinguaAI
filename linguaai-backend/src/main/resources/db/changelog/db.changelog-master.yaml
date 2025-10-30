@@ -1,106 +1,108 @@
 databaseChangeLog:
-- changeSet:
-    id: 001-create_users_table
-    author: Dijkstra
-    changes:
+  - changeSet:
+      id: 001-create_users_table
+      author: Dijkstra
+      changes:
         - sqlFile:
-              path: db/changelog/sql/001-create_users_table.sql
-              relativeToChangelogFile: false
-    rollback:
-        - sql: DROP TABLE IF EXISTS users;
+            path: db/changelog/sql/001-create_users_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/001-create_users_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 002-create_roles_table
-    author: Dijkstra
-    changes:
-      - sqlFile:
-          path: db/changelog/sql/002-create_roles_table.sql
-          relativeToChangelogFile: false
-    rollback:
-      - sql: DROP TABLE IF EXISTS roles;
+  - changeSet:
+      id: 002-create_roles_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/002-create_roles_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/002-create_roles_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 003-create_languages_table
-    author: Dijkstra
-    changes:
-       - sqlFile:
-           path: db/changelog/sql/003-create_languages_table.sql
-           relativeToChangelogFile: false
-    rollback:
-       - sql: DROP TABLE IF EXISTS languages;
+  - changeSet:
+      id: 003-create_languages_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/003-create_languages_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/003-create_languages_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 004-create_categories_table
-    author: Dijkstra
-    changes:
-       - sqlFile:
-           path: db/changelog/sql/004-create_categories_table.sql
-           relativeToChangelogFile: false
-    rollback:
-       - sql: >
-          ALTER TABLE categories DROP CONSTRAINT IF EXISTS categories_language_code_fk;
-          DROP TABLE IF EXISTS categories;
+  - changeSet:
+      id: 004-create_categories_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/004-create_categories_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/004-create_categories_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 005-create_quizzes_table
-    author: Dijkstra
-    changes:
-      - sqlFile:
-          path: db/changelog/sql/005-create_quizzes_table.sql
-          relativeToChangelogFile: false
-    rollback:
-      - sql: >
-          ALTER TABLE quizzes DROP CONSTRAINT IF EXISTS quizzes_user_id_fk;
-          ALTER TABLE quizzes DROP CONSTRAINT IF EXISTS quizzes_language_code_fk;
-          ALTER TABLE quizzes DROP CONSTRAINT IF EXISTS quizzes_category_id_fk;
-          DROP TABLE IF EXISTS quizzes;
+  - changeSet:
+      id: 005-create_quizzes_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/005-create_quizzes_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/005-create_quizzes_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 006-create_questions_table
-    author: Dijkstra
-    changes:
-      - sqlFile:
-          path: db/changelog/sql/006-create_questions_table.sql
-          relativeToChangelogFile: false
-    rollback:
-      - sql: >
-          ALTER TABLE questions DROP CONSTRAINT IF EXISTS questions_quiz_id_fk;
-          DROP TABLE IF EXISTS questions;
+  - changeSet:
+      id: 006-create_questions_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/006-create_questions_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/006-create_questions_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 007-create_user_quiz_history_table
-    author: Dijkstra
-    changes:
-      - sqlFile:
-          path: db/changelog/sql/007-create_user_quiz_history_table.sql
-          relativeToChangelogFile: false
-    rollback:
-      - sql: >
-          ALTER TABLE user_quiz_history DROP CONSTRAINT IF EXISTS user_quiz_history_user_id_fk;
-          ALTER TABLE user_quiz_history DROP CONSTRAINT IF EXISTS user_quiz_history_quiz_id_fk;
-          DROP TABLE IF EXISTS user_quiz_history;
+  - changeSet:
+      id: 007-create_user_quiz_history_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/007-create_user_quiz_history_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/007-create_user_quiz_history_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 008-create_user_quiz_history_table
-    author: Dijkstra
-    changes:
-      - sqlFile:
-          path: db/changelog/sql/008-create_user_quiz_history_table.sql
-          relativeToChangelogFile: false
-    rollback:
-      - sql: >
-          ALTER TABLE tasks DROP CONSTRAINT IF EXISTS tasks_quiz_id_fk;
-          DROP TABLE IF EXISTS tasks;
+  - changeSet:
+      id: 008-create_user_quiz_history_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/008-create_user_quiz_history_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/008-create_user_quiz_history_table_rollback.sql
+            relativeToChangelogFile: false
 
-- changeSet:
-    id: 009-create_user_role_table
-    author: Dijkstra
-    changes:
-      - sqlFile:
-          path: db/changelog/sql/009-create_user_role_table.sql
-          relativeToChangelogFile: false
-    rollback:
-      - sql: >
-          ALTER TABLE user_roles DROP CONSTRAINT IF EXISTS user_roles_user_id_fk;
-          ALTER TABLE user_roles DROP CONSTRAINT IF EXISTS user_roles_role_id_fk;
-          DROP TABLE IF EXISTS user_roles;
+  - changeSet:
+      id: 009-create_user_role_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/009-create_user_role_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/009-create_user_role_table_rollback.sql
+            relativeToChangelogFile: false

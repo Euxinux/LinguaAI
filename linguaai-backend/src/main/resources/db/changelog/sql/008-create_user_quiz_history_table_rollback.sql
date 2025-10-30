@@ -1,0 +1,2 @@
+ALTER TABLE tasks DROP CONSTRAINT IF EXISTS tasks_quiz_id_fk;
+DROP TABLE IF EXISTS tasks;
