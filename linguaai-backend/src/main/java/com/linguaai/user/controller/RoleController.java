@@ -30,7 +30,7 @@ public class RoleController {
         return ResponseEntity.ok(roleList);
     }
 
-    @GetMapping("/by-name/{name}")
+    @GetMapping("/names/{name}")
     public ResponseEntity<Role> getRoleByName(@PathVariable("name") String name) {
         log.info("Request received: GET /roles/by-name/{} - Fetching role by name", name);
         Role role = service.findByName(name)
