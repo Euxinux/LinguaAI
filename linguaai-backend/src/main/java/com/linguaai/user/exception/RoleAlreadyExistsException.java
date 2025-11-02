@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class RoleAlreadyExistsException extends RuntimeException {
-    private final String roleName;
+    private final String parameter;
 
-    public RoleAlreadyExistsException(String name) {
-        super("Role already exists: " + name);
-        this.roleName = name;
+    public RoleAlreadyExistsException(String parameter) {
+        super("Role already exists with: " + parameter);
+        this.parameter = parameter;
     }
 }
