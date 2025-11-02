@@ -106,3 +106,15 @@ databaseChangeLog:
         - sqlFile:
             path: db/changelog/rollback/009-create_user_role_table_rollback.sql
             relativeToChangelogFile: false
+
+  - changeSet:
+      id: 010-init_roles_database
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/010-init_roles_database.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/010-init_roles_database_rollback.sql
+            relativeToChangelogFile: false
