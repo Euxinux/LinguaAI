@@ -19,18 +19,18 @@ public class GlobalExceptionHandler {
         problem.setTitle("Role Not Found");
         problem.setDetail(ex.getMessage());
         problem.setProperty("errorCode", "ROLE_NOT_FOUND");
-        problem.setProperty("roleName", ex.getRoleName());
+        problem.setProperty("roleParameter", ex.getRoleName());
         return problem;
     }
 
     @ExceptionHandler(RoleAlreadyExistsException.class)
     public ProblemDetail handleRoleAlreadyExists(RoleAlreadyExistsException ex) {
-        log.warn("Role already exists: {}", ex.getRoleName(), ex);
+        log.warn("Role already exists: {}", ex.getParameter(), ex);
         ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.CONFLICT);
         problem.setTitle("Role Already Exists");
         problem.setDetail(ex.getMessage());
         problem.setProperty("errorCode", "ROLE_ALREADY_EXISTS");
-        problem.setProperty("roleName", ex.getRoleName());
+        problem.setProperty("roleParameter", ex.getParameter());
         return problem;
     }
 }
