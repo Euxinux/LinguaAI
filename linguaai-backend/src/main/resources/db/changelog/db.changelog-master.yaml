@@ -108,7 +108,7 @@ databaseChangeLog:
             relativeToChangelogFile: false
 
   - changeSet:
-      id: 010-init_roles_database
+      id: 010-init_roles_table
       author: Dijkstra
       changes:
         - sqlFile:
@@ -117,4 +117,16 @@ databaseChangeLog:
       rollback:
         - sqlFile:
             path: db/changelog/rollback/010-init_roles_table_rollback.sql
+            relativeToChangelogFile: false
+
+  - changeSet:
+      id: 011-init_languages_table
+      author: Dijkstra
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/011-init_languages_table.sql
+            relativeToChangelogFile: false
+      rollback:
+        - sqlFile:
+            path: db/changelog/rollback/011-init_languages_table.sql
             relativeToChangelogFile: false
