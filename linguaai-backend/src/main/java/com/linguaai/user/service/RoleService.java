@@ -21,7 +21,7 @@ public class RoleService {
     }
 
     public Optional<Role> getRoleId(String name) {
-        return repository.findByName(name);
+        return repository.findByName(name.toUpperCase());
     }
 
     public Role createNewRole(Role role) {
