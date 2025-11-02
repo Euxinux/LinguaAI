@@ -112,9 +112,9 @@ databaseChangeLog:
       author: Dijkstra
       changes:
         - sqlFile:
-            path: db/changelog/sql/010-init_roles_database.sql
+            path: db/changelog/sql/010-init_roles_table.sql
             relativeToChangelogFile: false
       rollback:
         - sqlFile:
-            path: db/changelog/rollback/010-init_roles_database_rollback.sql
+            path: db/changelog/rollback/010-init_roles_table_rollback.sql
             relativeToChangelogFile: false
