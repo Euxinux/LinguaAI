@@ -1,4 +1,4 @@
-package com.linguaai.common;
+package com.linguaai.common.exception.handler;
 
 import com.linguaai.user.exception.RoleAlreadyExistsException;
 import com.linguaai.user.exception.RoleNotFoundException;
